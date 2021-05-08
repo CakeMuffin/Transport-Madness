@@ -1,13 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	[SerializeField] private float speed = 10f;
+	[SerializeField] private float motorTorque;
+	[SerializeField] private float maxBreakForce;
+	[SerializeField] private float maxSteerAngle;
+	[SerializeField] private WheelCollider fLWheelCollider;
+	[SerializeField] private WheelCollider fRWheelCollider;
+	[SerializeField] private WheelCollider rLWheelCollider;
+	[SerializeField] private WheelCollider rRWheelCollider;
 
 	private InputManager inputManager;
 	private Rigidbody rb;
+
+	private float verticalInput;
+	private float horizontalInput;
+	private bool isBreaking = false;
+	private float currentSteerAngle;
+	private float currentBreakForce;
 
 	private void Awake()
 	{
@@ -21,10 +34,60 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		Vector3 verticalInput = new Vector3(0, 0, inputManager.GetPlayerMovement().y * speed);
-		Vector3 horizontalInput = new Vector3(0, inputManager.GetPlayerMovement().x * speed * 3, 0);
+		currentSteerAngle = maxSteerAngle * horizontalInput;
+		verticalInput = inputManager.GetPlayerMovement().y;
+		horizontalInput = inputManager.GetPlayerMovement().x;
+		currentBreakForce = isBreaking ? maxBreakForce : 0;
 
-		rb.AddRelativeForce(verticalInput);
-		rb.AddRelativeTorque(horizontalInput);
+		if (verticalInput < 0 && rb.velocity.magnitude > 1f)
+		{
+			isBreaking = true;
+		}
+		else
+		{
+			isBreaking = false;
+		}
+
+		Debug.Log(isBreaking);
+	}
+
+	private void FixedUpdate()
+	{
+		HandleSteering();
+		HandleMotor();
+		HandleBreaking();
+	}
+
+	private void HandleBreaking()
+	{
+		if (isBreaking)
+		{
+			rLWheelCollider.motorTorque = 0;
+			rRWheelCollider.motorTorque = 0;
+
+			fLWheelCollider.brakeTorque = currentBreakForce;
+			fRWheelCollider.brakeTorque = currentBreakForce;
+			rLWheelCollider.brakeTorque = currentBreakForce;
+			rRWheelCollider.brakeTorque = currentBreakForce;
+		}
+		else
+		{
+			fLWheelCollider.brakeTorque = 0;
+			fRWheelCollider.brakeTorque = 0;
+			rLWheelCollider.brakeTorque = 0;
+			rRWheelCollider.brakeTorque = 0;
+		}
+	}
+
+	private void HandleSteering()
+	{
+		fLWheelCollider.steerAngle = currentSteerAngle;
+		fRWheelCollider.steerAngle = currentSteerAngle;
+	}
+
+	private void HandleMotor()
+	{
+		rLWheelCollider.motorTorque = verticalInput * motorTorque;
+		rRWheelCollider.motorTorque = verticalInput * motorTorque;
 	}
 }
