@@ -47,8 +47,6 @@ public class PlayerController : MonoBehaviour
 		{
 			isBreaking = false;
 		}
-
-		Debug.Log(isBreaking);
 	}
 
 	private void FixedUpdate()
