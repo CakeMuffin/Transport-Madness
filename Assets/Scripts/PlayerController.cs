@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public float Speed { get; set; }
+
 	[SerializeField] private float motorTorque;
 	[SerializeField] private float maxBreakForce;
 	[SerializeField] private float maxSteerAngle;
@@ -47,6 +49,8 @@ public class PlayerController : MonoBehaviour
 		{
 			isBreaking = false;
 		}
+
+		Speed = rb.velocity.magnitude;
 	}
 
 	private void FixedUpdate()
