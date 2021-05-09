@@ -6,6 +6,7 @@ using UnityEngine;
 public class UiManager : MonoBehaviour
 {
 	[SerializeField] private TMP_Text cratesCounter;
+	[SerializeField] private TMP_Text moneyCounter;
 
 
 	public static UiManager Instance { get; set; }
@@ -23,5 +24,10 @@ public class UiManager : MonoBehaviour
 	public void HandleCratesCountChange(int value)
 	{
 		cratesCounter.SetText(value.ToString());
+	}
+
+	public void SetMoney(int value)
+	{
+		moneyCounter.SetText(value.ToString());
 	}
 }
