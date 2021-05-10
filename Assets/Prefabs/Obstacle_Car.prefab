@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 7880951763498718151}
   - component: {fileID: 7492259932084920804}
   - component: {fileID: 6655232840126764167}
+  - component: {fileID: 3368342836459171105}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -162,6 +163,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3368342836459171105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158455159861740722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0935886, y: 2.3119514, z: 6.0928936}
+  m_Center: {x: 2.8346218e-24, y: 0.84402424, z: -0.0464468}
 --- !u!1 &2427540984973192771
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +257,36 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4254249998095597057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 653304266381137703}
+  m_Layer: 0
+  m_Name: Ray
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &653304266381137703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254249998095597057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.212, z: 3.128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7283782321056487602}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5110239638789183169
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +382,7 @@ GameObject:
   - component: {fileID: 7985565812235091218}
   m_Layer: 0
   m_Name: Obstacle_Car
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,6 +403,7 @@ Transform:
   - {fileID: 5270809585662224472}
   - {fileID: 6076337091698978117}
   - {fileID: 7285987646011447159}
+  - {fileID: 653304266381137703}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -374,7 +419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb9379d74694fb46a6c5c3d9f987e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4000
+  rayOrigin: {fileID: 653304266381137703}
+  speed: 12000
 --- !u!65 &5671821545165769897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -386,8 +432,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.2183602, z: 6.174251}
-  m_Center: {x: 0, y: 0.8817574, z: 0.021422625}
+  m_Size: {x: 2, y: 1.9789314, z: 6.174251}
+  m_Center: {x: -8.2389307e-17, y: 1.0014718, z: 0.021422619}
 --- !u!54 &7985565812235091218
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -396,8 +442,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7953042217762275848}
   serializedVersion: 2
-  m_Mass: 200
-  m_Drag: 0.7
+  m_Mass: 600
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
