@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float Speed { get; set; }
-
 	[SerializeField] private float motorTorque;
 	[SerializeField] private float maxBreakForce;
 	[SerializeField] private float maxSteerAngle;
@@ -41,7 +39,7 @@ public class PlayerController : MonoBehaviour
 		horizontalInput = inputManager.GetPlayerMovement().x;
 		currentBreakForce = isBreaking ? maxBreakForce : 0;
 
-		if (verticalInput < 0 && rb.velocity.magnitude > 1f)
+		if (verticalInput < 0)
 		{
 			isBreaking = true;
 		}
@@ -49,8 +47,6 @@ public class PlayerController : MonoBehaviour
 		{
 			isBreaking = false;
 		}
-
-		Speed = rb.velocity.magnitude;
 	}
 
 	private void FixedUpdate()
@@ -89,7 +85,10 @@ public class PlayerController : MonoBehaviour
 
 	private void HandleMotor()
 	{
-		rLWheelCollider.motorTorque = verticalInput * motorTorque;
-		rRWheelCollider.motorTorque = verticalInput * motorTorque;
+		if (!isBreaking)
+		{
+			rLWheelCollider.motorTorque = motorTorque;
+			rRWheelCollider.motorTorque = motorTorque;
+		}
 	}
 }
