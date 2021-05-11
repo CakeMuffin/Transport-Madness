@@ -31,7 +31,6 @@ public class MovingObstacle : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log(isObstructed);
 			isObstructed = false;
 		}
 
