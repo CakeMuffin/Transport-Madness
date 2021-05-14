@@ -5,6 +5,9 @@ using UnityEngine.Playables;
 
 public class DeliveryZone : MonoBehaviour
 {
+	[SerializeField] private GameObject cratesPrefab;
+	[SerializeField] private GameObject warehouse;
+
 	[SerializeField] private int moneyPerCrate = 50;
 	[SerializeField] private PlayableDirector timeline;
 
@@ -59,5 +62,18 @@ public class DeliveryZone : MonoBehaviour
 	private void AddMoney()
 	{
 		GameManager.Instance.AddMoney(moneyPerCrate);
+	}
+
+	public void ClearCratesFromTrunk()
+	{
+		foreach (var crates in GameObject.FindGameObjectsWithTag("Crates"))
+		{
+			Destroy(crates);
+		}
+	}
+
+	public void LoadCratesToTrunk()
+	{
+		Instantiate(cratesPrefab, playerController.trunk.transform); 
 	}
 }

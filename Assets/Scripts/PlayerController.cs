@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public GameObject trunk;
+
 	[SerializeField] private float motorTorque;
 	[SerializeField] private float maxBreakForce;
 	[SerializeField] private float maxSteerAngle;

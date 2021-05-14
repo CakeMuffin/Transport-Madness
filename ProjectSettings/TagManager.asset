@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Crate
   - Obstacle
+  - Crates
   layers:
   - Default
   - TransparentFX
