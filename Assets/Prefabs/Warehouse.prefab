@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa07f86763dee64589484e7767b65da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cratesPrefab: {fileID: 143995676043336133, guid: 0e6968d6ebf91234f899ed03bfab4a2a, type: 3}
   moneyPerCrate: 50
   timeline: {fileID: 8535472545980226029}
 --- !u!1 &7890742887343841966

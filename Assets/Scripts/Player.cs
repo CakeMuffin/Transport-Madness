@@ -6,13 +6,13 @@ public class Player : MonoBehaviour
 {
 
 
-    void Start()
-    {
-        
-    }
+	void Start()
+	{
+		
+	}
 
-    void Update()
-    {
-        
-    }
+	void Update()
+	{
+		
+	}
 }
