@@ -42,7 +42,12 @@ public class MovingObstacle : MonoBehaviour
 		if (!isColided && !isObstructed)
 		{
 			rb.AddRelativeForce(Vector3.forward * speed);
-		} 
+		}
+
+		if (!isColided && isObstructed)
+		{
+			rb.AddRelativeForce(Vector3.forward * -speed);
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -50,6 +55,14 @@ public class MovingObstacle : MonoBehaviour
 		if (collision.gameObject.CompareTag("Player"))
 		{
 			isColided = true;
+		}
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			rb.freezeRotation = false;
 		}
 	}
 }
