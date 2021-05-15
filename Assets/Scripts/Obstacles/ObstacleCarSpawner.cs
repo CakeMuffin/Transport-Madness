@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class ObstacleCarSpawner : MonoBehaviour
 {
-    [SerializeField] private float repeatEvery = 3f;
-    private List<GameObject> obstaceCarsPrefabs;
+	public bool CanSpawn { get; set; } = false;
 
-    void Start()
-    {
-        obstaceCarsPrefabs = ResourcesManager.Instance.GetObstaceCarsPrefabs();
+	[SerializeField] private float repeatEvery = 3f;
+	private List<GameObject> obstaceCarsPrefabs;
 
-        InvokeRepeating(nameof(SpawnObstacleCar), 0.1f, repeatEvery);
-    }
-
-    private void SpawnObstacleCar()
+	void Start()
 	{
-        GameObject randCar = obstaceCarsPrefabs[Random.Range(0, obstaceCarsPrefabs.Count)];
-        Instantiate(randCar, transform.position, transform.rotation);
+		obstaceCarsPrefabs = ResourcesManager.Instance.GetObstaceCarsPrefabs();
+
+		InvokeRepeating(nameof(SpawnObstacleCar), 0.1f, repeatEvery);
+	}
+
+	private void SpawnObstacleCar()
+	{
+		if (CanSpawn)
+		{
+			GameObject randCar = obstaceCarsPrefabs[Random.Range(0, obstaceCarsPrefabs.Count)];
+			Instantiate(randCar, transform.position, transform.rotation);
+		}
 	}
 }
