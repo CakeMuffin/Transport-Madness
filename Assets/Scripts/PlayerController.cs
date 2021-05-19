@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public GameObject trunk;
-
 	[SerializeField] private float motorTorque;
 	[SerializeField] private float maxBreakForce;
 	[SerializeField] private float maxSteerAngle;
@@ -15,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private WheelCollider rLWheelCollider;
 	[SerializeField] private WheelCollider rRWheelCollider;
 
+	private Player player;
 	private InputManager inputManager;
 	private Rigidbody rb;
 
@@ -23,9 +22,21 @@ public class PlayerController : MonoBehaviour
 	private bool isBreaking = false;
 	private float currentSteerAngle;
 	private float currentBreakForce;
+	private float speed;
+
+	public float Speed
+	{
+		get => speed;
+		set
+		{
+			speed = value;
+			player.Speed = speed;
+		}
+	}
 
 	private void Awake()
 	{
+		player = GetComponent<Player>();
 		rb = GetComponent<Rigidbody>();
 	}
 
@@ -49,6 +60,8 @@ public class PlayerController : MonoBehaviour
 		{
 			isBreaking = false;
 		}
+
+		Speed = rb.velocity.magnitude;
 	}
 
 	private void FixedUpdate()
