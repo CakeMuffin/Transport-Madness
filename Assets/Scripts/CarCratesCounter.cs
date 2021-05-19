@@ -6,32 +6,35 @@ using UnityEngine.Events;
 
 public class CarCratesCounter : MonoBehaviour
 {
-	private List<GameObject> crates = new List<GameObject>();
+	private Player player;
 
-	private UiManager uiManager;
-
-	void Start()
+	private void Awake()
 	{
-		uiManager = UiManager.Instance;
+		player = GetComponentInParent<Player>();
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Crate"))
 		{
-			crates.Add(other.gameObject);
+			player.CratesInTrunk.Add(other.gameObject);
 		}
 
-		uiManager.HandleCratesCountChange(crates.Count);
+		UpdateCrates();
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.CompareTag("Crate"))
 		{
-			crates.Remove(other.gameObject);
+			player.CratesInTrunk.Remove(other.gameObject);
 		}
 
-		uiManager.HandleCratesCountChange(crates.Count);
+		UpdateCrates();
+	}
+
+	private void UpdateCrates()
+	{
+		player.UpdateCrates();
 	}
 }
