@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 8504354753563551994}
   - component: {fileID: 8504354753563551993}
   - component: {fileID: 8504354753563551995}
+  - component: {fileID: 8781071430962610981}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -609,6 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1346ab86359c00e4eb087e49ae823f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trunk: {fileID: 4984558898959233674}
 --- !u!114 &8504354753563551997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,7 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4c69673901c504ab4a3b81cb8fc001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trunk: {fileID: 4984558898959233674}
   motorTorque: 10000
   maxBreakForce: 15000
   maxSteerAngle: 30
@@ -742,6 +743,81 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4, y: 1.07, z: 0.1}
   m_Center: {x: 0, y: 1.2, z: 1.33}
+--- !u!114 &8781071430962610981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504354753563551986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 0c58eab84e2cf234282fb64f8c0e0137, type: 2}
+    - {fileID: 11400000, guid: 9cb14a9cd5a81154ca411921d3b57f2d, type: 2}
+    - {fileID: 11400000, guid: 371c918f392775349b5f229c1aa56952, type: 2}
+    - {fileID: 11400000, guid: 49f6cb62f7264d940844a17eaed77024, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: DeliveryZone, Assembly-CSharp
+          m_MethodName: ClearCratesFromTrunk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: DeliveryZone, Assembly-CSharp
+          m_MethodName: LoadCratesToTrunk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: HahdleCutsceneExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: HahdleCutsceneEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8772817237120558679
 GameObject:
   m_ObjectHideFlags: 0
