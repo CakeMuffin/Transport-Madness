@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
 	public bool InCutscene { get; set; } = true;
 	public Player player;
 
+	[SerializeField] private Transform restartPos;
+
 	private int money = 0;
+	private bool failed = false;
 
 	public static GameManager Instance { get; set; }
 
@@ -29,10 +32,16 @@ public class GameManager : MonoBehaviour
 
 	private void CheckSpeed()
 	{
-		if (player.Speed < 0.1f && !InCutscene)
+		if (player.Speed < 0.1f && !InCutscene && !failed)
 		{
-			Debug.Log("Captain Slow");
+			HandleFail();
 		}
+	}
+
+	private void HandleFail()
+	{
+		DialogueManager.Instance.HandleFail();
+		failed = true;
 	}
 
 	public void AddMoney(int value)
@@ -44,12 +53,37 @@ public class GameManager : MonoBehaviour
 	// Timeline
 	public void HahdleCutsceneEnter()
 	{
-		InCutscene = true;
+		//DialogueManager.Instance.HandleCutsceneStart();
 	}
 
 	// Timeline
 	public void HahdleCutsceneExit()
 	{
 		InCutscene = false;
+
+		DialogueManager.Instance.HandleCutsceneEnd();
+	}
+
+	public void Restart()
+	{
+		ClearAllCrates();
+
+		InCutscene = false;
+		player.transform.position = restartPos.position;
+	}
+
+	public void CratesUnloaded(int crates)
+	{
+		failed = false;
+		ClearAllCrates();
+		DialogueManager.Instance.HandleCutsceneUnload(crates);
+	}
+
+	public void ClearAllCrates()
+	{
+		foreach (var crate in GameObject.FindGameObjectsWithTag("Crate"))
+		{
+			Destroy(crate);
+		}
 	}
 }
