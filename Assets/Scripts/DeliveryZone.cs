@@ -10,6 +10,7 @@ public class DeliveryZone : MonoBehaviour
 	[SerializeField] private PlayableDirector timeline;
 
 	private Player player;
+	private int cratesUnloaded = 0;
 
 	private void Awake()
 	{
@@ -20,9 +21,9 @@ public class DeliveryZone : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
+			GameManager.Instance.InCutscene = true;
 			timeline.Play();
 			other.attachedRigidbody.isKinematic = true;
-			
 		}
 
 		if (other.CompareTag("Crate"))
@@ -46,24 +47,20 @@ public class DeliveryZone : MonoBehaviour
 
 	private void AddMoney()
 	{
-		int cratesQuantity = GameManager.Instance.player.CratesInTrunk.Count;
-		GameManager.Instance.AddMoney(moneyPerCrate * cratesQuantity);
+		cratesUnloaded = GameManager.Instance.player.CratesInTrunk.Count;
+		GameManager.Instance.AddMoney(moneyPerCrate * cratesUnloaded);
 	}
 
 	// Timeline
-	public void ClearCratesFromTrunk()
+	public void UnloadCrates()
 	{
 		AddMoney();
 		player.ClearCratesInTrunk();
-
-		foreach (var crate in GameObject.FindGameObjectsWithTag("Crate"))
-		{
-			Destroy(crate);
-		}
+		GameManager.Instance.CratesUnloaded(cratesUnloaded);
 	}
 
 	// Timeline
-	public void LoadCratesToTrunk()
+	public void LoadCrates()
 	{
 		Instantiate(cratesPrefab, player.trunk.transform); 
 	}
