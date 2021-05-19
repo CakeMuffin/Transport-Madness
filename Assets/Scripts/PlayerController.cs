@@ -68,9 +68,11 @@ public class PlayerController : MonoBehaviour
 	{
 		HandleSteering();
 		HandleMotor();
-		HandleBreaking();
+		//HandleBreaking();
 	}
 
+	// Testing
+	/*
 	private void HandleBreaking()
 	{
 		if (isBreaking)
@@ -91,6 +93,7 @@ public class PlayerController : MonoBehaviour
 			rRWheelCollider.brakeTorque = 0;
 		}
 	}
+	*/
 
 	private void HandleSteering()
 	{
