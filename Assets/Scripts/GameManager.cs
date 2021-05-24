@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 	public void HahdleCutsceneEnter()
 	{
 		//DialogueManager.Instance.HandleCutsceneStart();
+		ObstaclesManager.Instance.SpawnObstacles();
 	}
 
 	// Timeline

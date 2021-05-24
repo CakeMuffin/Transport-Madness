@@ -11,7 +11,7 @@ public class CarCleanup : MonoBehaviour
 			carSpawner.CanSpawn = false;
 		}
 
-		foreach (var cars in GameObject.FindGameObjectsWithTag("Obstacle"))
+		foreach (var cars in GameObject.FindGameObjectsWithTag("Car"))
 		{
 			Destroy(cars);
 		}

@@ -47,9 +47,9 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		currentSteerAngle = maxSteerAngle * horizontalInput;
 		verticalInput = inputManager.GetPlayerMovement().y;
 		horizontalInput = inputManager.GetPlayerMovement().x;
+		currentSteerAngle = maxSteerAngle * horizontalInput * 0.3f;
 		currentBreakForce = isBreaking ? maxBreakForce : 0;
 
 		if (verticalInput < 0)
