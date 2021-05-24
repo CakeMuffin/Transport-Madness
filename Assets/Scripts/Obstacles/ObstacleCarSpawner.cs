@@ -11,7 +11,7 @@ public class ObstacleCarSpawner : MonoBehaviour
 
 	void Start()
 	{
-		obstaceCarsPrefabs = ResourcesManager.Instance.GetObstaceCarsPrefabs();
+		obstaceCarsPrefabs = ResourcesManager.Instance.GetCars();
 
 		InvokeRepeating(nameof(SpawnObstacleCar), 0.1f, repeatEvery);
 	}

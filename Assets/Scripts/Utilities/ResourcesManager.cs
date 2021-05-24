@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ResourcesManager : MonoBehaviour
 {
-	[SerializeField] private List<GameObject> obstaceCarsPrefabs;
-	[SerializeField] private List<GameObject> obstaceObjectsPrefabs;
-
+	[SerializeField] private List<GameObject> carsPrefabs;
+	[SerializeField] private List<GameObject> smallObstacles;
+	[SerializeField] private List<GameObject> mediumObstacles;
+	[SerializeField] private List<GameObject> bigObstacles;
 
 	public static ResourcesManager Instance { get; set; }
 
@@ -15,19 +16,26 @@ public class ResourcesManager : MonoBehaviour
 		Instance = this;
 	}
 
-	public List<GameObject> GetObstaceCarsPrefabs()
+	public List<GameObject> GetCars()
 	{
-		return obstaceCarsPrefabs;
+		return carsPrefabs;
 	}
 
-	public List<GameObject> GetObstaceObjectsPrefabs()
+	public GameObject GetRandomSmallObstacle()
 	{
-		return obstaceObjectsPrefabs;
+		int randObstacle = Random.Range(0, smallObstacles.Count);
+		return smallObstacles[randObstacle];
 	}
 
-	public GameObject GetRandomObstaceObjectPrefab()
+	public GameObject GetRandomMediumObstacle()
 	{
-		int randObstacle = Random.Range(0, obstaceObjectsPrefabs.Count);
-		return obstaceObjectsPrefabs[randObstacle];
+		int randObstacle = Random.Range(0, mediumObstacles.Count);
+		return mediumObstacles[randObstacle];
+	}
+
+	public GameObject GetRandomBigObstacle()
+	{
+		int randObstacle = Random.Range(0, bigObstacles.Count);
+		return bigObstacles[randObstacle];
 	}
 }
