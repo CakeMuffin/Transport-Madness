@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2079518062251121508}
-  - component: {fileID: 6620260513761728806}
+  - component: {fileID: 4945136706693568672}
   - component: {fileID: 3478327147402777589}
   - component: {fileID: 1589337402050211215}
   - component: {fileID: 471809955459556315}
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6620260513761728806
+--- !u!114 &4945136706693568672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,7 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef598af469d5bb4c947b685d0581a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstaclesPerSegmentMax: 10
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  spawnAttemptsMax: 3
+  smallAmount: 20
+  mediumAmount: 10
+  bigAmount: 3
+  smallSafeZone: 0.3
+  mediumSafeZone: 1.5
+  bigSafeZone: 5
 --- !u!33 &3478327147402777589
 MeshFilter:
   m_ObjectHideFlags: 0
