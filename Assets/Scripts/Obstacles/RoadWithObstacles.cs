@@ -47,7 +47,7 @@ public class RoadWithObstacles : MonoBehaviour
 
 				float randX = Random.Range(-7.2f, 7.2f);
 				float randZ = Random.Range(1f, 49f);
-				randPos = new Vector3(randX, 2.5f, randZ);
+				randPos = new Vector3(randX, 1, randZ);
 				validPosition = true;
 
 				foreach (var obstacle in bigObstaclesPos)

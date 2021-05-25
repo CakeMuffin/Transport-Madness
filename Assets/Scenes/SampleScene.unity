@@ -755,10 +755,17 @@ MonoBehaviour:
   - {fileID: 8279272031287377019, guid: a3d437a0fdc9b4d43b378a3e0e0a87f5, type: 3}
   smallObstacles:
   - {fileID: 8911015311904899783, guid: 7cb224eb0a5efcd469dd3fac9c0c4ed5, type: 3}
+  - {fileID: 426450012566081328, guid: b4eb5fa0c0cc0da40ac6e7b74f6d735f, type: 3}
   mediumObstacles:
   - {fileID: 224195911875627629, guid: ecb55549a6799b34d83336a1844e9913, type: 3}
+  - {fileID: 5653654087608345493, guid: ebbae52e1a410ce468501eec199afb6a, type: 3}
+  - {fileID: 8781881487336328090, guid: bb1081845a17bfb4ca1f747e27fae2b0, type: 3}
   bigObstacles:
-  - {fileID: 3365301095323805360, guid: fa3ab9bb01c87e348b6d291ace7a07fc, type: 3}
+  - {fileID: 6506763728618046734, guid: f79e89003a329fe4b832148ab1082801, type: 3}
+  - {fileID: 519064457144745880, guid: f2238cf800862b74b85fada83ebbe6be, type: 3}
+  - {fileID: 5072292530770072659, guid: 50de07ce6120f3245b7ec25857f79cee, type: 3}
+  - {fileID: 2253867168813541776, guid: 5fa7e83fdcb6b3e40a2daafc61ab6aa4, type: 3}
+  - {fileID: 4159100450227048576, guid: 62e3f1d824fb1c94bb8c4d18aadd4bda, type: 3}
 --- !u!1 &165976553
 GameObject:
   m_ObjectHideFlags: 0
@@ -6575,7 +6582,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1899192748}
-  m_LocalRotation: {x: 0.33642238, y: 0.000000016203437, z: -0.000000005788609, w: 0.94171125}
+  m_LocalRotation: {x: 0.33642235, y: -0.000000016203447, z: 0.0000000057886127, w: 0.94171125}
   m_LocalPosition: {x: 0.97, y: 6.76, z: -53.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7591,7 +7598,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112914879}
-  m_LocalRotation: {x: 0.33642238, y: 0.000000016203437, z: -0.000000005788609, w: 0.94171125}
+  m_LocalRotation: {x: 0.33642235, y: -0.000000016203447, z: 0.0000000057886127, w: 0.94171125}
   m_LocalPosition: {x: 0.97, y: 6.76, z: -53.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
