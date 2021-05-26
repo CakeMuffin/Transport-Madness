@@ -10,43 +10,27 @@ public class MovingObstacle : MonoBehaviour
 
 	private Rigidbody rb;
 	private bool isColided = false;
-	private bool isObstructed = false;
 
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
 	}
 
+	private void Start()
+	{
+		rb.AddRelativeForce(Vector3.forward * 15, ForceMode.VelocityChange);
+	}
+
 	void Update()
 	{
-		RaycastHit hit;
 
-		if (Physics.Raycast(rayOrigin.position, transform.forward, out hit, 10))
-		{
-			if (hit.transform.CompareTag("Obstacle") || hit.transform.CompareTag("Player"))
-			{
-				isObstructed = true;
-
-			}
-		}
-		else
-		{
-			isObstructed = false;
-		}
-
-		Debug.DrawRay(rayOrigin.position, transform.forward * 10, Color.red);
 	}
 
 	private void FixedUpdate()
 	{
-		if (!isColided && !isObstructed)
+		if (!isColided)
 		{
 			rb.AddRelativeForce(Vector3.forward * speed);
-		}
-
-		if (!isColided && isObstructed)
-		{
-			rb.AddRelativeForce(Vector3.forward * -speed);
 		}
 	}
 

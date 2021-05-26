@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 589250394232721144}
   m_Layer: 7
   m_Name: Cars
-  m_TagString: Obstacle
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
