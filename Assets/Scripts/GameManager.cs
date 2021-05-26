@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Transform restartPos;
 
+	private List<CarSpawnTrigger> carSpawnTriggers = new List<CarSpawnTrigger>();
 	private int money = 0;
 	private bool failed = false;
 
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
+		carSpawnTriggers = FindObjectsOfType<CarSpawnTrigger>().ToList();
 	}
 
 	void Start()
@@ -65,7 +68,8 @@ public class GameManager : MonoBehaviour
 		DialogueManager.Instance.HandleCutsceneEnd();
 	}
 
-	public void Restart()
+	// Reset whole run
+	public void NewRun()
 	{
 		ClearAllCrates();
 
@@ -73,10 +77,12 @@ public class GameManager : MonoBehaviour
 		player.transform.position = restartPos.position;
 	}
 
+	// Rerun 
 	public void CratesUnloaded(int crates)
 	{
 		failed = false;
-		ClearAllCrates();
+		Restart();
+
 		DialogueManager.Instance.HandleCutsceneUnload(crates);
 	}
 
@@ -85,6 +91,17 @@ public class GameManager : MonoBehaviour
 		foreach (var crate in GameObject.FindGameObjectsWithTag("Crate"))
 		{
 			Destroy(crate);
+		}
+	}
+
+	// Continue current run
+	private void Restart()
+	{
+		ClearAllCrates();
+
+		foreach (var carSpawnTrigger in carSpawnTriggers)
+		{
+			carSpawnTrigger.ResetTrigger();
 		}
 	}
 }

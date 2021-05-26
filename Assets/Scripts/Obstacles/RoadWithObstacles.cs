@@ -23,8 +23,6 @@ public class RoadWithObstacles : MonoBehaviour
 	private void Start()
 	{
 		resourcesManager = ResourcesManager.Instance;
-
-		//SpawnObstacles();
 	}
 
 	public void SpawnObstacles()
