@@ -4,16 +4,30 @@ using UnityEngine;
 
 public class CarSpawnTrigger : MonoBehaviour
 {
-	[SerializeField] List<GameObject> roadCarSpawner;
+	private RoadSection roadSection;
+	private bool spawning = false;
+
+	private void Awake()
+	{
+		roadSection = GetComponentInParent<RoadSection>();
+	}
 
 	private void OnTriggerEnter(Collider other)
 	{
+		ObstaclesManager.Instance.CleanupCars();
+
 		if (other.gameObject.CompareTag("Player"))
 		{
-			foreach (var carSpawner in roadCarSpawner)
+			if (!spawning)
 			{
-				carSpawner.GetComponentInChildren<ObstacleCarSpawner>().CanSpawn = true;
+				spawning = true;
+				roadSection.SpawnCars(true);
 			}
 		}
+	}
+
+	public void ResetTrigger()
+	{
+		spawning = false;
 	}
 }
