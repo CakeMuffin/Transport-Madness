@@ -8,12 +8,14 @@ public class ObstaclesManager : MonoBehaviour
 	[SerializeField] private bool spawnAllowed = true;
 
 	private List<RoadSection> roadSections = new List<RoadSection>();
+	private List<CarSpawnTrigger> carSpawnTriggers = new List<CarSpawnTrigger>();
 
 	public static ObstaclesManager Instance { get; set; }
 
 	private void Awake()
 	{
 		Instance = this;
+		carSpawnTriggers = FindObjectsOfType<CarSpawnTrigger>().ToList();
 	}
 
 	void Start()
@@ -39,6 +41,11 @@ public class ObstaclesManager : MonoBehaviour
 
 	public void CleanupCars()
 	{
+		foreach (var carSpawnTrigger in carSpawnTriggers)
+		{
+			carSpawnTrigger.ResetTrigger();
+		}
+
 		foreach (var cars in GameObject.FindGameObjectsWithTag("Car"))
 		{
 			Destroy(cars);
