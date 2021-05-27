@@ -6,7 +6,7 @@ public class ObstacleCarCatcher : MonoBehaviour
 {
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Obstacle"))
+		if (other.CompareTag("Car"))
 		{
 			Destroy(other.gameObject);
 		}

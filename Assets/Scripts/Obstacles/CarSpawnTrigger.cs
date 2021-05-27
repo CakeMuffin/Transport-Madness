@@ -14,12 +14,11 @@ public class CarSpawnTrigger : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		ObstaclesManager.Instance.CleanupCars();
-
 		if (other.gameObject.CompareTag("Player"))
 		{
 			if (!spawning)
 			{
+				ObstaclesManager.Instance.CleanupCars();
 				spawning = true;
 				roadSection.SpawnCars(true);
 			}
