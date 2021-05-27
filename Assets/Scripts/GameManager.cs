@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Transform restartPos;
 
-	private List<CarSpawnTrigger> carSpawnTriggers = new List<CarSpawnTrigger>();
+
 	private int money = 0;
 	private bool failed = false;
 
@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-		carSpawnTriggers = FindObjectsOfType<CarSpawnTrigger>().ToList();
 	}
 
 	void Start()
@@ -98,10 +97,5 @@ public class GameManager : MonoBehaviour
 	private void Restart()
 	{
 		ClearAllCrates();
-
-		foreach (var carSpawnTrigger in carSpawnTriggers)
-		{
-			carSpawnTrigger.ResetTrigger();
-		}
 	}
 }

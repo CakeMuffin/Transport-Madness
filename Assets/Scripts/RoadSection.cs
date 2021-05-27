@@ -24,23 +24,20 @@ public class RoadSection : MonoBehaviour
 	{
 		if (canSpawn)
 		{
-			StartCoroutine(SpawnCar());
+			InvokeRepeating(nameof(SpawnCar), 0, spawnEvery);
+			Debug.Log("Start spawining");
 		}
 		else
 		{
-			StopCoroutine(SpawnCar());
+			CancelInvoke(nameof(SpawnCar));
 		}
 	}
 
-	IEnumerator SpawnCar()
+	private void SpawnCar()
 	{
 		int randSpawnPoint = Random.Range(0, roadCarSpawner.Count);
 
 		GameObject randCar = obstaceCarsPrefabs[Random.Range(0, obstaceCarsPrefabs.Count)];
 		Instantiate(randCar, roadCarSpawner[randSpawnPoint].transform.position, roadCarSpawner[randSpawnPoint].transform.rotation);
-
-		yield return new WaitForSeconds(spawnEvery);
-
-		SpawnCars(true);
 	}
 }
