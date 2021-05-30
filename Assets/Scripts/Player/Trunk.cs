@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CarCratesCounter : MonoBehaviour
+public class Trunk : MonoBehaviour
 {
 	private Player player;
 
@@ -19,8 +19,6 @@ public class CarCratesCounter : MonoBehaviour
 		{
 			player.CratesInTrunk.Add(other.gameObject);
 		}
-
-		UpdateCrates();
 	}
 
 	private void OnTriggerExit(Collider other)
@@ -29,12 +27,5 @@ public class CarCratesCounter : MonoBehaviour
 		{
 			player.CratesInTrunk.Remove(other.gameObject);
 		}
-
-		UpdateCrates();
-	}
-
-	private void UpdateCrates()
-	{
-		player.UpdateCrates();
 	}
 }

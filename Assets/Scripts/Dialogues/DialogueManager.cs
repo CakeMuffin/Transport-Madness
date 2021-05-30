@@ -12,6 +12,7 @@ public class DialogueManager : MonoBehaviour
 	[SerializeField] private Dialogue unloadDialogue20;
 	[SerializeField] private Dialogue failDialogue;
 
+	private GameManager gameManager;
 	private bool firstTime = true;
 
 	public static DialogueManager Instance { get; set; }
@@ -21,20 +22,29 @@ public class DialogueManager : MonoBehaviour
 		Instance = this;
 	}
 
+	private void Start()
+	{
+		gameManager = GameManager.Instance;
+
+		gameManager.OnCratesUnload += HandleCutsceneUnload;
+		gameManager.OnFail += HandleFail;
+		gameManager.OnCutsceneExit += HandleCutsceneEnd;
+	}
+
 	public void HandleCutsceneStart()
 	{
 		
 	}
 
-	public void HandleCutsceneUnload(int crates)
+	public void HandleCutsceneUnload()
 	{
 		if (!firstTime)
 		{
-			if (crates == 0)
+			if (gameManager.player.CratesInTrunk.Count == 0)
 			{
 				dialogueWindow.TriggerWindow(unloadDialogue0);
 			}
-			else if (crates == 20)
+			else if (gameManager.player.CratesInTrunk.Count == 20)
 			{
 				dialogueWindow.TriggerWindow(unloadDialogue20);
 			}

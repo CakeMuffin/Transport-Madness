@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Transform restartPos;
 
-
-	private int money = 0;
+	public int Money { get; set; } = 0;
 	private bool failed = false;
+
+	public event UnityAction OnCutsceneEnter;
+	public event UnityAction OnCutsceneExit;
+	public event UnityAction OnNewRun;
+	public event UnityAction OnCratesUnload;
+	public event UnityAction OnFail;
+	public event UnityAction OnMoneyChange;
 
 	public static GameManager Instance { get; set; }
 
@@ -29,10 +36,10 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		CheckSpeed();
+		CheckFailCondition();
 	}
 
-	private void CheckSpeed()
+	private void CheckFailCondition()
 	{
 		if (player.Speed < 0.1f && !InCutscene && !failed)
 		{
@@ -42,60 +49,65 @@ public class GameManager : MonoBehaviour
 
 	private void HandleFail()
 	{
-		DialogueManager.Instance.HandleFail();
 		failed = true;
+		OnFail?.Invoke();
 	}
 
 	public void AddMoney(int value)
 	{
-		money += value;
-		UiManager.Instance.SetMoney(money);
+		Money += value;
+		OnMoneyChange?.Invoke();
 	}
 
-	// Timeline
-	public void HahdleCutsceneEnter()
+
+	public void CutsceneEnter()
 	{
-		//DialogueManager.Instance.HandleCutsceneStart();
-		ObstaclesManager.Instance.SpawnObstacles();
+		OnCutsceneEnter?.Invoke();
+		NewRun();
 	}
 
-	// Timeline
-	public void HahdleCutsceneExit()
+	public void CutsceneExit()
+	{
+		Invoke(nameof(DelayedCutsceneExit), 1.5f);
+		OnCutsceneExit?.Invoke();
+	}
+
+	// To get a chance to speedup before checking to fail stop.
+	private void DelayedCutsceneExit()
 	{
 		InCutscene = false;
-
-		DialogueManager.Instance.HandleCutsceneEnd();
 	}
 
-	// Reset whole run
-	public void NewRun()
+	// OK modal window.
+	public void Restart()
 	{
-		ClearAllCrates();
+		NewRun();
 
-		InCutscene = false;
+		Money = 0;
+	}
+
+	private void NewRun()
+	{
+		failed = false;
+		ClearDroppedCrates();
+		OnNewRun?.Invoke();
 		player.transform.position = restartPos.position;
 	}
 
-	// Rerun 
-	public void CratesUnloaded(int crates)
+	public void CratesUnloaded()
 	{
-		failed = false;
-		Restart();
-
-		DialogueManager.Instance.HandleCutsceneUnload(crates);
+		OnCratesUnload?.Invoke();
 	}
 
-	public void ClearAllCrates()
+	public void ClearDroppedCrates()
 	{
+		// Can be optimized with 2 lists.
 		foreach (var crate in GameObject.FindGameObjectsWithTag("Crate"))
 		{
-			Destroy(crate);
+			if (!player.CratesInTrunk.Contains(crate))
+			{
+				Destroy(crate);
+			}
 		}
-	}
-
-	// Continue current run
-	private void Restart()
-	{
-		ClearAllCrates();
 	}
 }

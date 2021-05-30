@@ -25,7 +25,6 @@ public class RoadSection : MonoBehaviour
 		if (canSpawn)
 		{
 			InvokeRepeating(nameof(SpawnCar), 0, spawnEvery);
-			Debug.Log("Start spawining");
 		}
 		else
 		{

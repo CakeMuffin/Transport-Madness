@@ -10,6 +10,8 @@ public class UiManager : MonoBehaviour
 
 	public static UiManager Instance { get; set; }
 
+	private GameManager gameManager;
+
 	private void Awake()
 	{
 		Instance = this;
@@ -17,16 +19,18 @@ public class UiManager : MonoBehaviour
 
 	void Start()
 	{
-		
+		gameManager = GameManager.Instance;
+		gameManager.OnMoneyChange += HandleMoneyChange;
+		gameManager.OnCratesUnload += HandleCratesCountChange;
 	}
 
-	public void HandleCratesCountChange(int value)
+	public void HandleCratesCountChange()
 	{
-		cratesText.SetText(value.ToString());
+		cratesText.SetText(gameManager.player.CratesInTrunk.Count.ToString());
 	}
 
-	public void SetMoney(int value)
+	public void HandleMoneyChange()
 	{
-		moneyText.SetText(value.ToString());
+		moneyText.SetText(gameManager.Money.ToString());
 	}
 }
