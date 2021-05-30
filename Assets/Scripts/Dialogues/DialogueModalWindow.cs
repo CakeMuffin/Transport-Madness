@@ -39,6 +39,6 @@ public class DialogueModalWindow : MonoBehaviour
 	{
 		animator.Play("Idle");
 
-		GameManager.Instance.NewRun();
+		GameManager.Instance.Restart();
 	}
 }

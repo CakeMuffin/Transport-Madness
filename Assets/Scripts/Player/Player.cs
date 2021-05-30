@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	public float Speed { get; set; }
 	public List<GameObject> CratesInTrunk { get; set; } = new List<GameObject>();
 	public GameObject trunk;
+	public float Speed { get; set; }
 
-	private CarCratesCounter cratesCounter;
 	private UiManager uiManager;
+	private Trunk cratesCounter;
 
 	private void Awake()
 	{
-		cratesCounter = GetComponentInChildren<CarCratesCounter>();
+		cratesCounter = GetComponentInChildren<Trunk>();
 	}
 
 	void Start()
@@ -21,14 +21,13 @@ public class Player : MonoBehaviour
 		uiManager = UiManager.Instance;
 	}
 
-	public void UpdateCrates()
-	{
-		uiManager.HandleCratesCountChange(CratesInTrunk.Count);
-	}
-
 	public void ClearCratesInTrunk()
 	{
-		CratesInTrunk.Clear();
+		foreach (var crate in CratesInTrunk)
+		{
+			Destroy(crate);
+		}
 
+		CratesInTrunk.Clear();
 	}
 }
