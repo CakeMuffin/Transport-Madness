@@ -21,22 +21,13 @@ public class ObstaclesManager : MonoBehaviour
 	void Start()
 	{
 		roadSections = FindObjectsOfType<RoadSection>().ToList();
+		GameManager.Instance.OnNewRun += PrepareNewRun;
 	}
 
-	public void SpawnObstacles()
+	public void PrepareNewRun()
 	{
-		if (spawnAllowed)
-		{
-			foreach (var obstacle in GameObject.FindGameObjectsWithTag("Obstacle"))
-			{
-				Destroy(obstacle);
-			}
-
-			foreach (var obstacles in FindObjectsOfType<RoadWithObstacles>())
-			{
-				obstacles.SpawnObstacles();
-			}
-		}
+		CleanupCars();
+		RespawnObstacles();
 	}
 
 	public void CleanupCars()
@@ -54,6 +45,22 @@ public class ObstaclesManager : MonoBehaviour
 		foreach (var roadSection in roadSections)
 		{
 			roadSection.SpawnCars(false);
+		}
+	}
+
+	private void RespawnObstacles()
+	{
+		if (spawnAllowed)
+		{
+			foreach (var obstacle in GameObject.FindGameObjectsWithTag("Obstacle"))
+			{
+				Destroy(obstacle);
+			}
+
+			foreach (var obstacles in FindObjectsOfType<RoadWithObstacles>())
+			{
+				obstacles.SpawnObstacles();
+			}
 		}
 	}
 }
