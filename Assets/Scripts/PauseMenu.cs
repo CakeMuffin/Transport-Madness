@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+		
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		
+	}
 
 	private void OnEnable()
 	{
-        Time.timeScale = 0;
+		Time.timeScale = 0;
 	}
 
 	private void OnDisable()
 	{
-        Time.timeScale = 1;
-    }
+		Time.timeScale = 1;
+	}
 }
