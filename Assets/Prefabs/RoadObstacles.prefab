@@ -51,9 +51,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   spawnAttemptsMax: 3
-  smallAmount: 20
-  mediumAmount: 10
-  bigAmount: 3
+  difficultyCoefficient: 2
+  smallAmount: 13
+  mediumAmount: 5
+  bigAmount: 1
   smallSafeZone: 0.3
   mediumSafeZone: 1.5
   bigSafeZone: 5

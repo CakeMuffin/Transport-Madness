@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
 	public List<GameObject> CratesInTrunk { get; set; } = new List<GameObject>();
-	public GameObject trunk;
+	public Trunk trunk;
 	public float Speed { get; set; }
 
 	private UiManager uiManager;
-	private Trunk cratesCounter;
+
+	public event UnityAction OnCratesChanged;
 
 	private void Awake()
 	{
-		cratesCounter = GetComponentInChildren<Trunk>();
+		trunk = GetComponentInChildren<Trunk>();
 	}
 
 	void Start()
 	{
 		uiManager = UiManager.Instance;
+	}
+
+	public void CratesCountChange()
+	{
+		OnCratesChanged?.Invoke();
 	}
 
 	public void ClearCratesInTrunk()

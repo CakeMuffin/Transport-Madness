@@ -9,11 +9,8 @@ public class GameManager : MonoBehaviour
 {
 	public bool InCutscene { get; set; } = true;
 	public Player player;
-
-	[SerializeField] private Transform restartPos;
-
 	public int Money { get; set; } = 0;
-	private bool failed = false;
+	public int RunNumber { get; set; } = 0;
 
 	public event UnityAction OnCutsceneEnter;
 	public event UnityAction OnCutsceneExit;
@@ -21,6 +18,10 @@ public class GameManager : MonoBehaviour
 	public event UnityAction OnCratesUnload;
 	public event UnityAction OnFail;
 	public event UnityAction OnMoneyChange;
+
+	[SerializeField] private Transform restartPos;
+
+	private bool failed = false;
 
 	public static GameManager Instance { get; set; }
 
@@ -36,6 +37,11 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
+		if (InputManager.Instance.GetDebug())
+		{
+			player.transform.position = restartPos.position;
+		}
+
 		CheckFailCondition();
 	}
 
@@ -84,6 +90,7 @@ public class GameManager : MonoBehaviour
 		NewRun();
 
 		Money = 0;
+		RunNumber = 0;
 	}
 
 	private void NewRun()
@@ -92,6 +99,7 @@ public class GameManager : MonoBehaviour
 		ClearDroppedCrates();
 		OnNewRun?.Invoke();
 		player.transform.position = restartPos.position;
+		RunNumber++;
 	}
 
 	public void CratesUnloaded()
