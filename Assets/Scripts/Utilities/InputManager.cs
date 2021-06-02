@@ -44,6 +44,11 @@ public class InputManager : MonoBehaviour
 		return playerControlls.Player.Debug.triggered;
 	}
 
+	public bool GetBack()
+	{
+		return playerControlls.Player.Back.triggered;
+	}
+
 	/*
 	public Vector2 GetMouseDelta()
 	{

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UiManager : MonoBehaviour
 {
+	[SerializeField] private PauseMenu pauseMenu;
 	[SerializeField] private TMP_Text cratesText;
 	[SerializeField] private TMP_Text moneyText;
 
@@ -22,6 +23,14 @@ public class UiManager : MonoBehaviour
 		gameManager = GameManager.Instance;
 		gameManager.OnMoneyChange += HandleMoneyChange;
 		gameManager.player.OnCratesChanged += HandleCratesCountChange;
+	}
+
+	private void Update()
+	{
+		if (InputManager.Instance.GetBack() && !pauseMenu.isActiveAndEnabled)
+		{
+			pauseMenu.gameObject.SetActive(true);
+		}
 	}
 
 	public void HandleCratesCountChange()
