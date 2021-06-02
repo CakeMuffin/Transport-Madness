@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class MovingObstacle : MonoBehaviour
 {
-	[SerializeField] private Transform rayOrigin;
 	[SerializeField] private float speed = 0.5f;
 
 	private Rigidbody rb;
