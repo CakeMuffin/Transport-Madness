@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Trunk : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class Trunk : MonoBehaviour
 		if (other.CompareTag("Crate"))
 		{
 			player.CratesInTrunk.Add(other.gameObject);
+			player.CratesCountChange();
 		}
 	}
 
@@ -26,6 +25,7 @@ public class Trunk : MonoBehaviour
 		if (other.CompareTag("Crate"))
 		{
 			player.CratesInTrunk.Remove(other.gameObject);
+			player.CratesCountChange();
 		}
 	}
 }

@@ -21,7 +21,7 @@ public class UiManager : MonoBehaviour
 	{
 		gameManager = GameManager.Instance;
 		gameManager.OnMoneyChange += HandleMoneyChange;
-		gameManager.OnCratesUnload += HandleCratesCountChange;
+		gameManager.player.OnCratesChanged += HandleCratesCountChange;
 	}
 
 	public void HandleCratesCountChange()
