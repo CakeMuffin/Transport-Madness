@@ -6,10 +6,11 @@ public class RoadWithObstacles : MonoBehaviour
 {
 	[SerializeField] private LayerMask obstacleLayer;
 	[SerializeField] private int spawnAttemptsMax;
-	[SerializeField] private int smallAmount;
+	[SerializeField] private float difficultyCoefficient;
+	[SerializeField, Header("Base obstacle amounts")] private int smallAmount;
 	[SerializeField] private int mediumAmount;
 	[SerializeField] private int bigAmount;
-	[SerializeField] private float smallSafeZone;
+	[SerializeField, Header("Safe zones")] private float smallSafeZone;
 	[SerializeField] private float mediumSafeZone;
 	[SerializeField] private float bigSafeZone;
 
@@ -34,7 +35,12 @@ public class RoadWithObstacles : MonoBehaviour
 
 	private void SpawnBigObstacles()
 	{
-		for (int i = 0; i < bigAmount; i++)
+		//int amount = Mathf.RoundToInt(bigAmount * difficultyCoefficient * GameManager.Instance.RunNumber);
+		int amount = Mathf.RoundToInt(Mathf.LerpUnclamped(bigAmount, bigAmount * difficultyCoefficient, GameManager.Instance.RunNumber));
+
+		//Debug.Log(amount);
+
+		for (int i = 0; i < amount; i++)
 		{
 			bool validPosition = false;
 			int spawnAttempts = 0;
@@ -43,8 +49,8 @@ public class RoadWithObstacles : MonoBehaviour
 			{
 				spawnAttempts++;
 
-				float randX = Random.Range(-7.2f, 7.2f);
-				float randZ = Random.Range(1f, 49f);
+				float randX = Random.Range(-6f, 6f);
+				float randZ = Random.Range(-2f, -48f);
 				randPos = new Vector3(randX, 1, randZ);
 				validPosition = true;
 
@@ -69,7 +75,11 @@ public class RoadWithObstacles : MonoBehaviour
 
 	private void SpawnMediumObstacles()
 	{
-		for (int i = 0; i < mediumAmount; i++)
+		//int amount = Mathf.RoundToInt(mediumAmount * difficultyCoefficient * GameManager.Instance.RunNumber);
+		int amount = Mathf.RoundToInt(Mathf.LerpUnclamped(mediumAmount, mediumAmount * difficultyCoefficient, GameManager.Instance.RunNumber));
+		//Debug.Log(amount);
+
+		for (int i = 0; i < amount; i++)
 		{
 			bool validPosition = false;
 			int spawnAttempts = 0;
@@ -79,7 +89,7 @@ public class RoadWithObstacles : MonoBehaviour
 				spawnAttempts++;
 
 				float randX = Random.Range(-7.2f, 7.2f);
-				float randZ = Random.Range(1f, 49f);
+				float randZ = Random.Range(-1f, -49f);
 				randPos = new Vector3(randX, 1, randZ);
 				validPosition = true;
 
@@ -112,7 +122,13 @@ public class RoadWithObstacles : MonoBehaviour
 
 	private void SpawnSmallObstacles()
 	{
-		for (int i = 0; i < smallAmount; i++)
+		//int amount = Mathf.RoundToInt(smallAmount * difficultyCoefficient * GameManager.Instance.RunNumber);
+
+		int amount = Mathf.RoundToInt(Mathf.LerpUnclamped(smallAmount, smallAmount * difficultyCoefficient, GameManager.Instance.RunNumber));
+
+		//Debug.Log(amount);
+
+		for (int i = 0; i < amount; i++)
 		{
 			bool validPosition = false;
 			int spawnAttempts = 0;
@@ -122,7 +138,7 @@ public class RoadWithObstacles : MonoBehaviour
 				spawnAttempts++;
 
 				float randX = Random.Range(-7.8f, 7.8f);
-				float randZ = Random.Range(0.5f, 49.5f);
+				float randZ = Random.Range(-0.5f, -49.5f);
 				randPos = new Vector3(randX, 1, randZ);
 				validPosition = true;
 
