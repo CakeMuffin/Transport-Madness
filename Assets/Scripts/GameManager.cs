@@ -65,6 +65,11 @@ public class GameManager : MonoBehaviour
 		OnMoneyChange?.Invoke();
 	}
 
+	public void ClearMoney()
+	{
+		Money = 0;
+		OnMoneyChange?.Invoke();
+	}
 
 	public void CutsceneEnter()
 	{
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
 	{
 		NewRun();
 
-		Money = 0;
+		ClearMoney();
 		RunNumber = 0;
 	}
 

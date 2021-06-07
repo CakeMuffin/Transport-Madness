@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 	[SerializeField] private float motorTorque;
-	[SerializeField] private float maxBreakForce;
 	[SerializeField] private float maxSteerAngle;
 	[SerializeField] private WheelCollider fLWheelCollider;
 	[SerializeField] private WheelCollider fRWheelCollider;
@@ -49,8 +48,7 @@ public class PlayerController : MonoBehaviour
 	{
 		verticalInput = inputManager.GetPlayerMovement().y;
 		horizontalInput = inputManager.GetPlayerMovement().x;
-		currentSteerAngle = maxSteerAngle * horizontalInput * 0.3f;
-		currentBreakForce = isBreaking ? maxBreakForce : 0;
+		currentSteerAngle = maxSteerAngle * horizontalInput * 0.2f;
 
 		if (verticalInput < 0)
 		{
@@ -68,32 +66,7 @@ public class PlayerController : MonoBehaviour
 	{
 		HandleSteering();
 		HandleMotor();
-		//HandleBreaking();
 	}
-
-	// Testing
-	/*
-	private void HandleBreaking()
-	{
-		if (isBreaking)
-		{
-			rLWheelCollider.motorTorque = 0;
-			rRWheelCollider.motorTorque = 0;
-
-			fLWheelCollider.brakeTorque = currentBreakForce;
-			fRWheelCollider.brakeTorque = currentBreakForce;
-			rLWheelCollider.brakeTorque = currentBreakForce;
-			rRWheelCollider.brakeTorque = currentBreakForce;
-		}
-		else
-		{
-			fLWheelCollider.brakeTorque = 0;
-			fRWheelCollider.brakeTorque = 0;
-			rLWheelCollider.brakeTorque = 0;
-			rRWheelCollider.brakeTorque = 0;
-		}
-	}
-	*/
 
 	private void HandleSteering()
 	{

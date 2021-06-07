@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		uiManager = UiManager.Instance;
+		GameManager.Instance.OnFail += ClearCratesInTrunk;
 	}
 
 	public void CratesCountChange()
@@ -36,5 +37,7 @@ public class Player : MonoBehaviour
 		}
 
 		CratesInTrunk.Clear();
+
+		OnCratesChanged?.Invoke();
 	}
 }
