@@ -27,7 +27,7 @@ public class UiManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (InputManager.Instance.GetBack() && !pauseMenu.isActiveAndEnabled)
+		if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.isActiveAndEnabled)
 		{
 			pauseMenu.gameObject.SetActive(true);
 		}
