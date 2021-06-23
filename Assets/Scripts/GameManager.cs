@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (InputManager.Instance.GetDebug())
+		if (Input.GetKeyDown(KeyCode.R))
 		{
 			player.transform.position = restartPos.position;
 		}

@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private WheelCollider rRWheelCollider;
 
 	private Player player;
-	private InputManager inputManager;
 	private Rigidbody rb;
 
 	private float verticalInput;
@@ -41,13 +40,13 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
-		inputManager = InputManager.Instance;
+		
 	}
 
 	void Update()
 	{
-		verticalInput = inputManager.GetPlayerMovement().y;
-		horizontalInput = inputManager.GetPlayerMovement().x;
+		horizontalInput = SimpleInput.GetAxis("Horizontal");
+		Debug.Log(horizontalInput);
 		currentSteerAngle = maxSteerAngle * horizontalInput * 0.2f;
 
 		if (verticalInput < 0)
