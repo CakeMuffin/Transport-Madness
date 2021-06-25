@@ -12,14 +12,17 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private WheelCollider rLWheelCollider;
 	[SerializeField] private WheelCollider rRWheelCollider;
 
+	[Header("Wheels Visual")]
+	[SerializeField] private Transform fLWheel;
+	[SerializeField] private Transform fRWheel;
+	[SerializeField] private Transform rLWheel;
+	[SerializeField] private Transform rRWheel;
+
 	private Player player;
 	private Rigidbody rb;
 
-	private float verticalInput;
 	private float horizontalInput;
-	private bool isBreaking = false;
 	private float currentSteerAngle;
-	private float currentBreakForce;
 	private float speed;
 
 	public float Speed
@@ -46,19 +49,29 @@ public class PlayerController : MonoBehaviour
 	void Update()
 	{
 		horizontalInput = SimpleInput.GetAxis("Horizontal");
-		Debug.Log(horizontalInput);
 		currentSteerAngle = maxSteerAngle * horizontalInput * 0.2f;
 
-		if (verticalInput < 0)
-		{
-			isBreaking = true;
-		}
-		else
-		{
-			isBreaking = false;
-		}
-
 		Speed = rb.velocity.magnitude;
+		UpdateWheelsPoses();
+	}
+
+	private void UpdateWheelsPoses()
+	{
+		UpdateWheelPose(fLWheelCollider, fLWheel);
+		UpdateWheelPose(fRWheelCollider, fRWheel);
+		UpdateWheelPose(rLWheelCollider, rLWheel);
+		UpdateWheelPose(rRWheelCollider, rRWheel);
+	}
+
+	private	void UpdateWheelPose(WheelCollider wheelCollider, Transform wheelVisual)
+	{
+		Vector3 pos = wheelVisual.position;
+		Quaternion rot = wheelVisual.rotation;
+
+		wheelCollider.GetWorldPose(out pos, out rot);
+
+		wheelVisual.position = pos;
+		wheelVisual.rotation = rot;
 	}
 
 	private void FixedUpdate()
@@ -75,10 +88,7 @@ public class PlayerController : MonoBehaviour
 
 	private void HandleMotor()
 	{
-		if (!isBreaking)
-		{
-			rLWheelCollider.motorTorque = motorTorque;
-			rRWheelCollider.motorTorque = motorTorque;
-		}
+		rLWheelCollider.motorTorque = motorTorque;
+		rRWheelCollider.motorTorque = motorTorque;
 	}
 }
