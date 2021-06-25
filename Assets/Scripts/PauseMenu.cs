@@ -1,24 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-	// Start is called before the first frame update
-	void Start()
-	{
-		
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		
-	}
+	[SerializeField] private TMP_Text RecordText;	
 
 	private void OnEnable()
 	{
 		Time.timeScale = 0;
+		RecordText.SetText(PlayerPrefs.GetInt("Money", 0).ToString());
 	}
 
 	private void OnDisable()
