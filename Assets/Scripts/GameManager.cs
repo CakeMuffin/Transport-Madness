@@ -110,6 +110,10 @@ public class GameManager : MonoBehaviour
 	public void CratesUnloaded()
 	{
 		OnCratesUnload?.Invoke();
+		if (Money > PlayerPrefs.GetInt("Money"))
+		{
+			PlayerPrefs.SetInt("Money", Money);
+		}
 	}
 
 	public void ClearDroppedCrates()
