@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
 	private Player player;
 	private Rigidbody rb;
+	private CarAudio carAudio;
 
 	private float horizontalInput;
 	private float currentSteerAngle;
@@ -35,10 +36,13 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	public float RPM { get; set; }
+
 	private void Awake()
 	{
 		player = GetComponent<Player>();
 		rb = GetComponent<Rigidbody>();
+		carAudio = GetComponent<CarAudio>();
 	}
 
 	void Start()
@@ -52,6 +56,8 @@ public class PlayerController : MonoBehaviour
 		currentSteerAngle = maxSteerAngle * horizontalInput * 0.2f;
 
 		Speed = rb.velocity.magnitude;
+		RPM = rRWheelCollider.rpm;
+
 		UpdateWheelsPoses();
 	}
 
@@ -90,5 +96,13 @@ public class PlayerController : MonoBehaviour
 	{
 		rLWheelCollider.motorTorque = motorTorque;
 		rRWheelCollider.motorTorque = motorTorque;
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (Speed > 10 && collision != null && !collision.gameObject.CompareTag("Crate"))
+		{
+			carAudio.PlayCrashSound();
+		}
 	}
 }
