@@ -14,7 +14,6 @@ public class CarAudio : MonoBehaviour
 
 	PlayerController playerController;
 
-
 	private void Awake()
 	{
 		playerController = GetComponent<PlayerController>();
@@ -24,6 +23,14 @@ public class CarAudio : MonoBehaviour
 	{
 		float pitch = Mathf.LerpUnclamped(pitchMin, pitchMax, playerController.Speed);
 		audioSourceEngine.pitch = pitch * pitchMultiplier;
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (playerController.Speed > 15 && collision != null && !collision.gameObject.CompareTag("Crate"))
+		{
+			PlayCrashSound();
+		}
 	}
 
 	public void PlayCrashSound()

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour
 {
-    [SerializeField] List<AudioClip> rattles;
+	[SerializeField] List<AudioClip> rattles;
 
-    AudioSource audioSource;
+	AudioSource audioSource;
 	Rigidbody rb;
 
 	private void Awake()

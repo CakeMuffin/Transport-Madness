@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RoadWithObstacles : MonoBehaviour
 {
-	[SerializeField] private LayerMask obstacleLayer;
 	[SerializeField] private int spawnAttemptsMax;
 	[SerializeField] private float difficultyCoefficient;
 	[SerializeField, Header("Base obstacle amounts")] private int smallAmount;
