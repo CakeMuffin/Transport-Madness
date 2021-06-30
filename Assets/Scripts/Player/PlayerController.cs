@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 	private float horizontalInput;
 	private float currentSteerAngle;
 	private float speed;
+	private bool wheelSpinState = true;
 
 	public float Speed
 	{
@@ -36,8 +37,6 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public float RPM { get; set; }
-
 	private void Awake()
 	{
 		player = GetComponent<Player>();
@@ -47,18 +46,28 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
-		
+		GameManager.Instance.OnCutsceneEnter += SpinWheels;
+		GameManager.Instance.OnCratesUnload += StopSpinWheels;
+		GameManager.Instance.OnCratesLoad += SpinWheels;
 	}
 
 	void Update()
 	{
-		horizontalInput = SimpleInput.GetAxis("Horizontal");
+		if (!GameManager.Instance.Failed)
+		{
+			horizontalInput = SimpleInput.GetAxis("Horizontal");
+		}
 		currentSteerAngle = maxSteerAngle * horizontalInput * 0.2f;
 
 		Speed = rb.velocity.magnitude;
-		RPM = rRWheelCollider.rpm;
 
 		UpdateWheelsPoses();
+
+		if (!GameManager.Instance.InCutscene)
+		{
+			fLWheelCollider.motorTorque = 0;
+			fRWheelCollider.motorTorque = 0;
+		}
 	}
 
 	private void UpdateWheelsPoses()
@@ -96,13 +105,31 @@ public class PlayerController : MonoBehaviour
 	{
 		rLWheelCollider.motorTorque = motorTorque;
 		rRWheelCollider.motorTorque = motorTorque;
+
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void SpinWheels()
 	{
-		if (Speed > 10 && collision != null && !collision.gameObject.CompareTag("Crate"))
-		{
-			carAudio.PlayCrashSound();
-		}
+		fLWheelCollider.brakeTorque = 0;
+		fRWheelCollider.brakeTorque = 0;
+		rLWheelCollider.brakeTorque = 0;
+		rRWheelCollider.brakeTorque = 0;
+
+		fLWheelCollider.motorTorque = motorTorque;
+		fRWheelCollider.motorTorque = motorTorque;
+	}
+
+	private void StopSpinWheels()
+	{
+		fLWheelCollider.motorTorque = 1;
+		fRWheelCollider.motorTorque = 1;
+		rLWheelCollider.motorTorque = 1;
+		rRWheelCollider.motorTorque = 1;
+
+
+		fLWheelCollider.brakeTorque = 10000;
+		fRWheelCollider.brakeTorque = 10000;
+		rLWheelCollider.brakeTorque = 10000;
+		rRWheelCollider.brakeTorque = 10000;		
 	}
 }

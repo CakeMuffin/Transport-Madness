@@ -55,7 +55,7 @@ public class Warehouse : MonoBehaviour
 	public void HandleLoadingCrates()
 	{
 		SpawnCrates();
-		//GameManager.Instance.CratesUnloaded();
+		GameManager.Instance.CratesLoaded();
 	}
 
 	public void SpawnCrates()
