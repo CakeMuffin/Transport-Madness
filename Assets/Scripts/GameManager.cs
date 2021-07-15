@@ -22,8 +22,7 @@ public class GameManager : MonoBehaviour
 	public event UnityAction OnFail;
 	public event UnityAction OnMoneyChange;
 
-	[SerializeField] private Transform restartPos;
-
+	[SerializeField] Transform restartPos;
 
 	public static GameManager Instance { get; set; }
 
