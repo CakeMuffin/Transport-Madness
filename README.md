@@ -9,7 +9,6 @@ Planned platforms: PC (itch.io, play.unity.com) and Android (play.google.com).
 
 What I want to learn: 
 1. GIT Version control for Unity projects.
-2. New Unity Input System.
 3. Cinemachine.
 4. WebGL publishing.
 
